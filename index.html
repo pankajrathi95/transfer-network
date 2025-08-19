@@ -6,10 +6,10 @@
      <title>Transfer Network - Airline & Hotel Loyalty Program Transfer Tool</title>
      
      <!-- Favicon -->
-     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.svg">
-     <link rel="shortcut icon" href="favicon.svg">
+     <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+     <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+     <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+     <link rel="shortcut icon" href="assets/icons/favicon.svg">
      <link rel="manifest" href="site.webmanifest">
      
      <!-- Theme colors for browsers -->
@@ -100,6 +100,7 @@
         <input type="text" id="source" placeholder="Select source partner..." autocomplete="off" 
                class="w-full p-3 border-2 border-gray-300 rounded-lg text-base focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
         <div class="dropdown" id="sourceDropdown"></div>
+        <p class="text-xs text-gray-500 mt-1">e.g. Marriott Bonvoy</p>
     </div>
     
     <div class="flex-1 relative">
@@ -107,12 +108,16 @@
         <input type="text" id="destination" placeholder="Select destination partner..." autocomplete="off"
                class="w-full p-3 border-2 border-gray-300 rounded-lg text-base focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
         <div class="dropdown" id="destinationDropdown"></div>
+        <p class="text-xs text-gray-500 mt-1">e.g. Hilton Honors</p>
     </div>
     
-    <button onclick="findRoutes()" id="findRoutesBtn" disabled
-            class="self-end px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors">
-        Find Routes
-    </button>
+    <div class="flex flex-col">
+        <label class="block mb-2 font-semibold text-gray-700 opacity-0">Find Routes</label>
+        <button onclick="findRoutes()" id="findRoutesBtn" disabled
+                class="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors">
+            Find Routes
+        </button>
+    </div>
  </div>
  
  <!-- Transfer Calculator Widget -->
