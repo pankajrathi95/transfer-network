@@ -1,0 +1,1063 @@
+{
+    "nodes": {
+        "airlines": {
+            "american_airlines": {
+                "id": "american_airlines",
+                "name": "American Airlines AAdvantage",
+                "type": "airline",
+                "category": "US Domestic",
+                "currency": "AAdvantage Miles"
+            },
+            "delta": {
+                "id": "delta",
+                "name": "Delta SkyMiles",
+                "type": "airline",
+                "category": "US Domestic",
+                "currency": "SkyMiles"
+            },
+            "united": {
+                "id": "united",
+                "name": "United MileagePlus",
+                "type": "airline",
+                "category": "US Domestic",
+                "currency": "MileagePlus Miles"
+            },
+            "alaska": {
+                "id": "alaska",
+                "name": "Alaska Airlines Mileage Plan",
+                "type": "airline",
+                "category": "US Domestic",
+                "currency": "Mileage Plan Miles"
+            },
+            "southwest": {
+                "id": "southwest",
+                "name": "Southwest Rapid Rewards",
+                "type": "airline",
+                "category": "US Domestic",
+                "currency": "Rapid Rewards Points"
+            },
+            "jetblue": {
+                "id": "jetblue",
+                "name": "JetBlue TrueBlue",
+                "type": "airline",
+                "category": "US Domestic",
+                "currency": "TrueBlue Points"
+            },
+            "hawaiian": {
+                "id": "hawaiian",
+                "name": "Hawaiian Airlines HawaiianMiles",
+                "type": "airline",
+                "category": "US Domestic",
+                "currency": "HawaiianMiles"
+            },
+            "british_airways": {
+                "id": "british_airways",
+                "name": "British Airways Executive Club",
+                "type": "airline",
+                "category": "International",
+                "currency": "Avios"
+            },
+            "iberia": {
+                "id": "iberia",
+                "name": "Iberia Plus",
+                "type": "airline",
+                "category": "International",
+                "currency": "Avios"
+            },
+            "aer_lingus": {
+                "id": "aer_lingus",
+                "name": "Aer Lingus AerClub",
+                "type": "airline",
+                "category": "International",
+                "currency": "Avios"
+            },
+            "qatar_airways": {
+                "id": "qatar_airways",
+                "name": "Qatar Airways Privilege Club",
+                "type": "airline",
+                "category": "International",
+                "currency": "Avios"
+            },
+            "finnair": {
+                "id": "finnair",
+                "name": "Finnair Plus",
+                "type": "airline",
+                "category": "International",
+                "currency": "Avios"
+            },
+            "air_france_klm": {
+                "id": "air_france_klm",
+                "name": "Air France-KLM Flying Blue",
+                "type": "airline",
+                "category": "International",
+                "currency": "Flying Blue Miles"
+            },
+            "virgin_atlantic": {
+                "id": "virgin_atlantic",
+                "name": "Virgin Atlantic Flying Club",
+                "type": "airline",
+                "category": "International",
+                "currency": "Virgin Points"
+            },
+            "singapore": {
+                "id": "singapore",
+                "name": "Singapore Airlines KrisFlyer",
+                "type": "airline",
+                "category": "International",
+                "currency": "KrisFlyer Miles"
+            },
+            "ana": {
+                "id": "ana",
+                "name": "ANA Mileage Club",
+                "type": "airline",
+                "category": "International",
+                "currency": "ANA Miles"
+            },
+            "jal": {
+                "id": "jal",
+                "name": "Japan Airlines Mileage Bank",
+                "type": "airline",
+                "category": "International",
+                "currency": "JAL Miles"
+            },
+            "cathay_pacific": {
+                "id": "cathay_pacific",
+                "name": "Cathay Pacific Asia Miles",
+                "type": "airline",
+                "category": "International",
+                "currency": "Asia Miles"
+            },
+            "emirates": {
+                "id": "emirates",
+                "name": "Emirates Skywards",
+                "type": "airline",
+                "category": "International",
+                "currency": "Skywards Miles"
+            },
+            "qantas": {
+                "id": "qantas",
+                "name": "Qantas Frequent Flyer",
+                "type": "airline",
+                "category": "International",
+                "currency": "Qantas Points"
+            },
+            "avianca": {
+                "id": "avianca",
+                "name": "Avianca LifeMiles",
+                "type": "airline",
+                "category": "International",
+                "currency": "LifeMiles"
+            },
+            "air_canada": {
+                "id": "air_canada",
+                "name": "Air Canada Aeroplan",
+                "type": "airline",
+                "category": "International",
+                "currency": "Aeroplan Points"
+            },
+            "turkish": {
+                "id": "turkish",
+                "name": "Turkish Airlines Miles&Smiles",
+                "type": "airline",
+                "category": "International",
+                "currency": "Miles&Smiles Miles"
+            },
+            "etihad": {
+                "id": "etihad",
+                "name": "Etihad Guest",
+                "type": "airline",
+                "category": "International",
+                "currency": "Etihad Guest Miles"
+            },
+            "thai_airways": {
+                "id": "thai_airways",
+                "name": "Thai Airways Royal Orchid Plus",
+                "type": "airline",
+                "category": "International",
+                "currency": "Royal Orchid Plus Miles"
+            },
+            "air_india": {
+                "id": "air_india",
+                "name": "Air India Flying Returns",
+                "type": "airline",
+                "category": "International",
+                "currency": "Flying Returns Miles"
+            },
+            "indigo": {
+                "id": "indigo",
+                "name": "IndiGo 6E Rewards",
+                "type": "airline",
+                "category": "Domestic",
+                "currency": "6E Rewards Points"
+            },
+            "vistara": {
+                "id": "vistara",
+                "name": "Vistara Club Vistara",
+                "type": "airline",
+                "category": "International",
+                "currency": "Club Vistara Points"
+            },
+            "spicejet": {
+                "id": "spicejet",
+                "name": "SpiceJet SpiceClub",
+                "type": "airline",
+                "category": "Domestic",
+                "currency": "SpiceClub Points"
+            },
+            "lufthansa": {
+                "id": "lufthansa",
+                "name": "Lufthansa Miles & More",
+                "type": "airline",
+                "category": "International",
+                "currency": "Miles & More Miles"
+            },
+            "korean_air": {
+                "id": "korean_air",
+                "name": "Korean Air SKYPASS",
+                "type": "airline",
+                "category": "International",
+                "currency": "SKYPASS Miles"
+            },
+            "copa_airlines": {
+                "id": "copa_airlines",
+                "name": "Copa Airlines ConnectMiles",
+                "type": "airline",
+                "category": "International",
+                "currency": "ConnectMiles"
+            },
+            "tap_portugal": {
+                "id": "tap_portugal",
+                "name": "TAP Air Portugal Miles&Go",
+                "type": "airline",
+                "category": "International",
+                "currency": "Miles&Go Miles"
+            },
+            "aeromexico": {
+                "id": "aeromexico",
+                "name": "Aeromexico Club Premier",
+                "type": "airline",
+                "category": "International",
+                "currency": "Club Premier Points"
+            },
+            "sas": {
+                "id": "sas",
+                "name": "SAS EuroBonus",
+                "type": "airline",
+                "category": "International",
+                "currency": "EuroBonus Points"
+            },
+            "eva_air": {
+                "id": "eva_air",
+                "name": "EVA Air Infinity MileageLands",
+                "type": "airline",
+                "category": "International",
+                "currency": "Infinity MileageLands Miles"
+            },
+            "azul": {
+                "id": "azul",
+                "name": "Azul VoeAzul",
+                "type": "airline",
+                "category": "International",
+                "currency": "VoeAzul Points"
+            }
+        },
+        "hotels": {
+            "marriott": {
+                "id": "marriott",
+                "name": "Marriott Bonvoy",
+                "type": "hotel",
+                "category": "Luxury/Premium",
+                "currency": "Bonvoy Points"
+            },
+            "hilton": {
+                "id": "hilton",
+                "name": "Hilton Honors",
+                "type": "hotel",
+                "category": "Luxury/Premium",
+                "currency": "Hilton Honors Points"
+            },
+            "hyatt": {
+                "id": "hyatt",
+                "name": "World of Hyatt",
+                "type": "hotel",
+                "category": "Luxury/Premium",
+                "currency": "World of Hyatt Points"
+            },
+            "ihg": {
+                "id": "ihg",
+                "name": "IHG Rewards Club",
+                "type": "hotel",
+                "category": "Mid-tier/Premium",
+                "currency": "IHG Rewards Points"
+            },
+            "accor": {
+                "id": "accor",
+                "name": "Accor Live Limitless",
+                "type": "hotel",
+                "category": "International",
+                "currency": "Accor Points"
+            },
+            "choice": {
+                "id": "choice",
+                "name": "Choice Privileges",
+                "type": "hotel",
+                "category": "Budget/Mid-tier",
+                "currency": "Choice Privileges Points"
+            },
+            "wyndham": {
+                "id": "wyndham",
+                "name": "Wyndham Rewards",
+                "type": "hotel",
+                "category": "Budget/Mid-tier",
+                "currency": "Wyndham Rewards Points"
+            },
+            "radisson": {
+                "id": "radisson",
+                "name": "Radisson Rewards Americas",
+                "type": "hotel",
+                "category": "Mid-tier",
+                "currency": "Radisson Rewards Points"
+            },
+            "itc": {
+                "id": "itc",
+                "name": "ITC Hotels",
+                "type": "hotel",
+                "category": "Luxury/Premium",
+                "currency": "ITC Rewards Points"
+            },
+            "taj": {
+                "id": "taj",
+                "name": "Taj Hotels InnerCircle",
+                "type": "hotel",
+                "category": "Luxury/Premium",
+                "currency": "InnerCircle Points"
+            },
+            "oberoi": {
+                "id": "oberoi",
+                "name": "Oberoi Hotels",
+                "type": "hotel",
+                "category": "Luxury/Premium",
+                "currency": "Oberoi Rewards Points"
+            },
+            "leela": {
+                "id": "leela",
+                "name": "The Leela Palaces",
+                "type": "hotel",
+                "category": "Luxury/Premium",
+                "currency": "Leela Rewards Points"
+            },
+            "best_western": {
+                "id": "best_western",
+                "name": "Best Western Rewards",
+                "type": "hotel",
+                "category": "Mid-tier",
+                "currency": "Best Western Rewards Points"
+            },
+            "nh_hotels": {
+                "id": "nh_hotels",
+                "name": "NH Hotel Group Discoverer",
+                "type": "hotel",
+                "category": "Mid-tier/Premium",
+                "currency": "Discoverer Points"
+            },
+            "shangri_la": {
+                "id": "shangri_la",
+                "name": "Shangri-La Golden Circle",
+                "type": "hotel",
+                "category": "Luxury/Premium",
+                "currency": "Golden Circle Points"
+            },
+            "melia": {
+                "id": "melia",
+                "name": "Melia Rewards",
+                "type": "hotel",
+                "category": "Premium",
+                "currency": "Melia Rewards Points"
+            },
+            "scandic": {
+                "id": "scandic",
+                "name": "Scandic Friends",
+                "type": "hotel",
+                "category": "Mid-tier",
+                "currency": "Scandic Friends Points"
+            }
+        }
+    },
+    "edges": {
+        "hotel_to_airline": {
+            "marriott": {
+                "american_airlines": {
+                    "ratio": "3:1",
+                    "min_transfer": 60000,
+                    "bonus_threshold": 60000,
+                    "bonus_miles": 5000,
+                    "notes": "Minimum 60k points, 5k bonus for transfers of 60k+"
+                },
+                "delta": {
+                    "ratio": "3:1",
+                    "min_transfer": 60000,
+                    "bonus_threshold": 60000,
+                    "bonus_miles": 5000,
+                    "notes": "Minimum 60k points, 5k bonus for transfers of 60k+"
+                },
+                "united": {
+                    "ratio": "3:1",
+                    "min_transfer": 60000,
+                    "bonus_threshold": 60000,
+                    "bonus_miles": 5000,
+                    "notes": "Minimum 60k points, 5k bonus for transfers of 60k+"
+                },
+                "alaska": {
+                    "ratio": "3:1",
+                    "min_transfer": 60000,
+                    "bonus_threshold": 60000,
+                    "bonus_miles": 5000,
+                    "notes": "Minimum 60k points, 5k bonus for transfers of 60k+"
+                },
+                "southwest": {
+                    "ratio": "3:1",
+                    "min_transfer": 60000,
+                    "bonus_threshold": 60000,
+                    "bonus_miles": 5000,
+                    "notes": "Minimum 60k points, 5k bonus for transfers of 60k+"
+                },
+                "air_canada": {
+                    "ratio": "3:1",
+                    "min_transfer": 60000,
+                    "bonus_threshold": 60000,
+                    "bonus_miles": 5000,
+                    "notes": "Minimum 60k points, 5k bonus for transfers of 60k+"
+                },
+                "air_france_klm": {
+                    "ratio": "3:1",
+                    "min_transfer": 60000,
+                    "bonus_threshold": 60000,
+                    "bonus_miles": 5000,
+                    "notes": "Minimum 60k points, 5k bonus for transfers of 60k+"
+                },
+                "british_airways": {
+                    "ratio": "3:1",
+                    "min_transfer": 60000,
+                    "bonus_threshold": 60000,
+                    "bonus_miles": 5000,
+                    "notes": "Minimum 60k points, 5k bonus for transfers of 60k+"
+                },
+                "emirates": {
+                    "ratio": "3:1",
+                    "min_transfer": 60000,
+                    "bonus_threshold": 60000,
+                    "bonus_miles": 5000,
+                    "notes": "Minimum 60k points, 5k bonus for transfers of 60k+"
+                },
+                "singapore": {
+                    "ratio": "3:1",
+                    "min_transfer": 60000,
+                    "bonus_threshold": 60000,
+                    "bonus_miles": 5000,
+                    "notes": "Minimum 60k points, 5k bonus for transfers of 60k+"
+                },
+                "virgin_atlantic": {
+                    "ratio": "3:1",
+                    "min_transfer": 60000,
+                    "bonus_threshold": 60000,
+                    "bonus_miles": 5000,
+                    "notes": "Minimum 60k points, 5k bonus for transfers of 60k+"
+                },
+                "avianca": {
+                    "ratio": "3:1",
+                    "min_transfer": 60000,
+                    "bonus_threshold": 60000,
+                    "bonus_miles": 5000,
+                    "notes": "Minimum 60k points, 5k bonus for transfers of 60k+"
+                },
+                "turkish": {
+                    "ratio": "3:1",
+                    "min_transfer": 60000,
+                    "bonus_threshold": 60000,
+                    "bonus_miles": 5000,
+                    "notes": "Minimum 60k points, 5k bonus for transfers of 60k+"
+                },
+                "jal": {
+                    "ratio": "3:1",
+                    "min_transfer": 60000,
+                    "bonus_threshold": 60000,
+                    "bonus_miles": 5000,
+                    "notes": "Minimum 60k points, 5k bonus for transfers of 60k+"
+                },
+                "cathay_pacific": {
+                    "ratio": "3:1",
+                    "min_transfer": 60000,
+                    "bonus_threshold": 60000,
+                    "bonus_miles": 5000,
+                    "notes": "Minimum 60k points, 5k bonus for transfers of 60k+"
+                },
+                "etihad": {
+                    "ratio": "3:1",
+                    "min_transfer": 60000,
+                    "bonus_threshold": 60000,
+                    "bonus_miles": 5000,
+                    "notes": "Minimum 60k points, 5k bonus for transfers of 60k+"
+                },
+                "hawaiian": {
+                    "ratio": "3:1",
+                    "min_transfer": 60000,
+                    "bonus_threshold": 60000,
+                    "bonus_miles": 5000,
+                    "notes": "Minimum 60k points, 5k bonus for transfers of 60k+"
+                },
+                "lufthansa": {
+                    "ratio": "3:1",
+                    "min_transfer": 60000,
+                    "bonus_threshold": 60000,
+                    "bonus_miles": 5000,
+                    "notes": "Minimum 60k points, 5k bonus for transfers of 60k+"
+                },
+                "korean_air": {
+                    "ratio": "3:1",
+                    "min_transfer": 60000,
+                    "bonus_threshold": 60000,
+                    "bonus_miles": 5000,
+                    "notes": "Minimum 60k points, 5k bonus for transfers of 60k+"
+                },
+                "copa_airlines": {
+                    "ratio": "3:1",
+                    "min_transfer": 60000,
+                    "bonus_threshold": 60000,
+                    "bonus_miles": 5000,
+                    "notes": "Minimum 60k points, 5k bonus for transfers of 60k+"
+                },
+                "tap_portugal": {
+                    "ratio": "3:1",
+                    "min_transfer": 60000,
+                    "bonus_threshold": 60000,
+                    "bonus_miles": 5000,
+                    "notes": "Minimum 60k points, 5k bonus for transfers of 60k+"
+                },
+                "aeromexico": {
+                    "ratio": "3:1",
+                    "min_transfer": 60000,
+                    "bonus_threshold": 60000,
+                    "bonus_miles": 5000,
+                    "notes": "Minimum 60k points, 5k bonus for transfers of 60k+"
+                },
+                "sas": {
+                    "ratio": "3:1",
+                    "min_transfer": 60000,
+                    "bonus_threshold": 60000,
+                    "bonus_miles": 5000,
+                    "notes": "Minimum 60k points, 5k bonus for transfers of 60k+"
+                }
+            },
+            "ihg": {
+                "american_airlines": {
+                    "ratio": "5:1",
+                    "min_transfer": 10000,
+                    "notes": "Poor value, generally not recommended"
+                },
+                "delta": {
+                    "ratio": "5:1",
+                    "min_transfer": 10000,
+                    "notes": "Poor value, generally not recommended"
+                },
+                "united": {
+                    "ratio": "5:1",
+                    "min_transfer": 10000,
+                    "notes": "Poor value, generally not recommended"
+                },
+                "alaska": {
+                    "ratio": "5:1",
+                    "min_transfer": 10000,
+                    "notes": "Poor value, generally not recommended"
+                },
+                "british_airways": {
+                    "ratio": "5:1",
+                    "min_transfer": 10000,
+                    "notes": "Poor value, generally not recommended"
+                },
+                "air_france_klm": {
+                    "ratio": "5:1",
+                    "min_transfer": 10000,
+                    "notes": "Poor value, generally not recommended"
+                },
+                "singapore": {
+                    "ratio": "5:1",
+                    "min_transfer": 10000,
+                    "notes": "Poor value, generally not recommended"
+                },
+                "cathay_pacific": {
+                    "ratio": "5:1",
+                    "min_transfer": 10000,
+                    "notes": "Poor value, generally not recommended"
+                },
+                "qantas": {
+                    "ratio": "5:1",
+                    "min_transfer": 10000,
+                    "notes": "Poor value, generally not recommended"
+                },
+                "ana": {
+                    "ratio": "5:1",
+                    "min_transfer": 10000,
+                    "notes": "Poor value, generally not recommended"
+                }
+            },
+            "hilton": {
+                "american_airlines": {
+                    "ratio": "10:1",
+                    "min_transfer": 10000,
+                    "notes": "Very poor value, avoid unless desperate"
+                },
+                "delta": {
+                    "ratio": "10:1",
+                    "min_transfer": 10000,
+                    "notes": "Very poor value, avoid unless desperate"
+                },
+                "united": {
+                    "ratio": "10:1",
+                    "min_transfer": 10000,
+                    "notes": "Very poor value, avoid unless desperate"
+                },
+                "british_airways": {
+                    "ratio": "10:1",
+                    "min_transfer": 10000,
+                    "notes": "Very poor value, avoid unless desperate"
+                },
+                "virgin_atlantic": {
+                    "ratio": "10:1",
+                    "min_transfer": 10000,
+                    "notes": "Very poor value, avoid unless desperate"
+                },
+                "singapore": {
+                    "ratio": "10:1",
+                    "min_transfer": 10000,
+                    "notes": "Very poor value, avoid unless desperate"
+                },
+                "air_france_klm": {
+                    "ratio": "10:1",
+                    "min_transfer": 10000,
+                    "notes": "Very poor value, avoid unless desperate"
+                },
+                "cathay_pacific": {
+                    "ratio": "10:1",
+                    "min_transfer": 10000,
+                    "notes": "Very poor value, avoid unless desperate"
+                },
+                "emirates": {
+                    "ratio": "10:1",
+                    "min_transfer": 10000,
+                    "notes": "Very poor value, avoid unless desperate"
+                },
+                "qantas": {
+                    "ratio": "10:1",
+                    "min_transfer": 10000,
+                    "notes": "Very poor value, avoid unless desperate"
+                }
+            },
+            "accor": {
+                "air_france_klm": {
+                    "ratio": "2:1",
+                    "min_transfer": 4000,
+                    "notes": "Decent value for Flying Blue"
+                },
+                "cathay_pacific": {
+                    "ratio": "2:1",
+                    "min_transfer": 4000,
+                    "notes": "Good value for Asia Miles"
+                },
+                "etihad": {
+                    "ratio": "2:1",
+                    "min_transfer": 4000,
+                    "notes": "Good value for Etihad Guest"
+                },
+                "thai_airways": {
+                    "ratio": "2:1",
+                    "min_transfer": 4000,
+                    "notes": "Good value for Royal Orchid Plus"
+                },
+                "qatar_airways": {
+                    "ratio": "2:1",
+                    "min_transfer": 4000,
+                    "notes": "Good value for Qatar Avios"
+                }
+            },
+            "itc": {
+                "air_india": {
+                    "ratio": "4:1",
+                    "min_transfer": 5000,
+                    "notes": "Domestic transfer option for India"
+                },
+                "vistara": {
+                    "ratio": "3:1",
+                    "min_transfer": 5000,
+                    "notes": "Good value for Vistara Club points"
+                }
+            },
+            "taj": {
+                "air_india": {
+                    "ratio": "4:1",
+                    "min_transfer": 5000,
+                    "notes": "Premium hotel to airline transfer"
+                },
+                "british_airways": {
+                    "ratio": "5:1",
+                    "min_transfer": 10000,
+                    "notes": "Transfer to Avios network"
+                }
+            },
+            "best_western": {
+                "american_airlines": {
+                    "ratio": "4:1",
+                    "min_transfer": 5000,
+                    "notes": "Mid-tier hotel transfer option"
+                },
+                "delta": {
+                    "ratio": "4:1",
+                    "min_transfer": 5000,
+                    "notes": "Mid-tier hotel transfer option"
+                },
+                "united": {
+                    "ratio": "4:1",
+                    "min_transfer": 5000,
+                    "notes": "Mid-tier hotel transfer option"
+                }
+            },
+            "nh_hotels": {
+                "lufthansa": {
+                    "ratio": "3:1",
+                    "min_transfer": 5000,
+                    "notes": "European hotel to European airline"
+                },
+                "tap_portugal": {
+                    "ratio": "3:1",
+                    "min_transfer": 5000,
+                    "notes": "European hotel transfer"
+                },
+                "sas": {
+                    "ratio": "3:1",
+                    "min_transfer": 5000,
+                    "notes": "European hotel transfer"
+                }
+            },
+            "shangri_la": {
+                "singapore": {
+                    "ratio": "2:1",
+                    "min_transfer": 5000,
+                    "notes": "Asian luxury hotel to airline"
+                },
+                "cathay_pacific": {
+                    "ratio": "2:1",
+                    "min_transfer": 5000,
+                    "notes": "Asian luxury hotel to airline"
+                },
+                "korean_air": {
+                    "ratio": "2:1",
+                    "min_transfer": 5000,
+                    "notes": "Asian luxury hotel to airline"
+                }
+            }
+        },
+        "airline_to_hotel": {
+            "singapore": {
+                "marriott": {
+                    "ratio": "1:1",
+                    "min_transfer": 2500,
+                    "notes": "Good value transfer option"
+                },
+                "hyatt": {
+                    "ratio": "1:1",
+                    "min_transfer": 2500,
+                    "notes": "Excellent value - Hyatt has great redemptions"
+                }
+            },
+            "cathay_pacific": {
+                "marriott": {
+                    "ratio": "1:1",
+                    "min_transfer": 2500,
+                    "notes": "Good value transfer option"
+                },
+                "hyatt": {
+                    "ratio": "1:1",
+                    "min_transfer": 2500,
+                    "notes": "Excellent value - Hyatt has great redemptions"
+                }
+            },
+            "british_airways": {
+                "marriott": {
+                    "ratio": "1:1",
+                    "min_transfer": 4500,
+                    "notes": "Good for topping off Marriott accounts"
+                }
+            },
+            "virgin_atlantic": {
+                "marriott": {
+                    "ratio": "1:1",
+                    "min_transfer": 1000,
+                    "notes": "Flexible transfer option"
+                },
+                "hilton": {
+                    "ratio": "1:1.5",
+                    "min_transfer": 1000,
+                    "notes": "Better value than most hotel transfers to airlines"
+                },
+                "ihg": {
+                    "ratio": "1:1",
+                    "min_transfer": 1000,
+                    "notes": "Useful for IHG redemptions"
+                }
+            },
+            "air_france_klm": {
+                "accor": {
+                    "ratio": "1:2",
+                    "min_transfer": 500,
+                    "notes": "Great value for Accor stays in Europe"
+                }
+            },
+            "air_india": {
+                "itc": {
+                    "ratio": "1:1",
+                    "min_transfer": 2500,
+                    "notes": "Indian airline to Indian hotel chain"
+                },
+                "taj": {
+                    "ratio": "1:1",
+                    "min_transfer": 2500,
+                    "notes": "Premium Indian airline to hotel transfer"
+                }
+            },
+            "vistara": {
+                "itc": {
+                    "ratio": "1:1.5",
+                    "min_transfer": 2000,
+                    "notes": "Enhanced value for premium transfers"
+                },
+                "taj": {
+                    "ratio": "1:1.2",
+                    "min_transfer": 2000,
+                    "notes": "Good value for luxury stays"
+                }
+            },
+            "lufthansa": {
+                "nh_hotels": {
+                    "ratio": "1:1",
+                    "min_transfer": 2500,
+                    "notes": "European airline to European hotel"
+                },
+                "shangri_la": {
+                    "ratio": "1:0.8",
+                    "min_transfer": 5000,
+                    "notes": "Miles to luxury hotel points"
+                }
+            },
+            "korean_air": {
+                "shangri_la": {
+                    "ratio": "1:1",
+                    "min_transfer": 2500,
+                    "notes": "Asian airline to luxury hotel"
+                },
+                "marriott": {
+                    "ratio": "1:1",
+                    "min_transfer": 2500,
+                    "notes": "Korean Air to Marriott transfer"
+                }
+            },
+            "sas": {
+                "nh_hotels": {
+                    "ratio": "1:1",
+                    "min_transfer": 2500,
+                    "notes": "Nordic airline to European hotel"
+                },
+                "scandic": {
+                    "ratio": "1:1.2",
+                    "min_transfer": 2000,
+                    "notes": "Nordic airline to Nordic hotel"
+                }
+            },
+            "azul": {
+                "marriott": {
+                    "ratio": "1:0.8",
+                    "min_transfer": 3000,
+                    "notes": "Brazilian airline to hotel points"
+                }
+            }
+        },
+        "hotel_to_hotel": {
+            "marriott": {
+                "hyatt": {
+                    "ratio": "2:1",
+                    "min_transfer": 20000,
+                    "notes": "Rare cross-hotel transfer option"
+                }
+            },
+            "itc": {
+                "taj": {
+                    "ratio": "1:1",
+                    "min_transfer": 5000,
+                    "notes": "Indian luxury hotel chain partnership"
+                }
+            },
+            "taj": {
+                "itc": {
+                    "ratio": "1:1",
+                    "min_transfer": 5000,
+                    "notes": "Indian luxury hotel chain partnership"
+                }
+            },
+            "shangri_la": {
+                "marriott": {
+                    "ratio": "1:1.2",
+                    "min_transfer": 10000,
+                    "notes": "Asian luxury hotel chain partnership"
+                }
+            },
+            "nh_hotels": {
+                "scandic": {
+                    "ratio": "1:1",
+                    "min_transfer": 5000,
+                    "notes": "European hotel chain partnership"
+                }
+            }
+        },
+        "airline_to_airline": {
+            "british_airways": {
+                "iberia": {
+                    "ratio": "1:1",
+                    "min_transfer": 1000,
+                    "notes": "Same Avios currency - instant transfer"
+                },
+                "aer_lingus": {
+                    "ratio": "1:1",
+                    "min_transfer": 1000,
+                    "notes": "Same Avios currency - instant transfer"
+                },
+                "qatar_airways": {
+                    "ratio": "1:1",
+                    "min_transfer": 1000,
+                    "notes": "Same Avios currency - instant transfer"
+                },
+                "finnair": {
+                    "ratio": "1:1",
+                    "min_transfer": 1000,
+                    "notes": "Same Avios currency - instant transfer"
+                }
+            },
+            "iberia": {
+                "british_airways": {
+                    "ratio": "1:1",
+                    "min_transfer": 1000,
+                    "notes": "Same Avios currency - instant transfer"
+                },
+                "aer_lingus": {
+                    "ratio": "1:1",
+                    "min_transfer": 1000,
+                    "notes": "Same Avios currency - instant transfer"
+                },
+                "qatar_airways": {
+                    "ratio": "1:1",
+                    "min_transfer": 1000,
+                    "notes": "Same Avios currency - instant transfer"
+                },
+                "finnair": {
+                    "ratio": "1:1",
+                    "min_transfer": 1000,
+                    "notes": "Same Avios currency - instant transfer"
+                }
+            },
+            "aer_lingus": {
+                "british_airways": {
+                    "ratio": "1:1",
+                    "min_transfer": 1000,
+                    "notes": "Same Avios currency - instant transfer"
+                },
+                "iberia": {
+                    "ratio": "1:1",
+                    "min_transfer": 1000,
+                    "notes": "Same Avios currency - instant transfer"
+                },
+                "qatar_airways": {
+                    "ratio": "1:1",
+                    "min_transfer": 1000,
+                    "notes": "Same Avios currency - instant transfer"
+                },
+                "finnair": {
+                    "ratio": "1:1",
+                    "min_transfer": 1000,
+                    "notes": "Same Avios currency - instant transfer"
+                }
+            },
+            "qatar_airways": {
+                "british_airways": {
+                    "ratio": "1:1",
+                    "min_transfer": 1000,
+                    "notes": "Same Avios currency - instant transfer"
+                },
+                "iberia": {
+                    "ratio": "1:1",
+                    "min_transfer": 1000,
+                    "notes": "Same Avios currency - instant transfer"
+                },
+                "aer_lingus": {
+                    "ratio": "1:1",
+                    "min_transfer": 1000,
+                    "notes": "Same Avios currency - instant transfer"
+                },
+                "finnair": {
+                    "ratio": "1:1",
+                    "min_transfer": 1000,
+                    "notes": "Same Avios currency - instant transfer"
+                }
+            },
+            "finnair": {
+                "british_airways": {
+                    "ratio": "1:1",
+                    "min_transfer": 1000,
+                    "notes": "Same Avios currency - instant transfer"
+                },
+                "iberia": {
+                    "ratio": "1:1",
+                    "min_transfer": 1000,
+                    "notes": "Same Avios currency - instant transfer"
+                },
+                "aer_lingus": {
+                    "ratio": "1:1",
+                    "min_transfer": 1000,
+                    "notes": "Same Avios currency - instant transfer"
+                },
+                "qatar_airways": {
+                    "ratio": "1:1",
+                    "min_transfer": 1000,
+                    "notes": "Same Avios currency - instant transfer"
+                }
+            }
+        }
+    },
+    "transfer_categories": {
+        "excellent_value": [
+            "1:1",
+            "1:1.5",
+            "2:1"
+        ],
+        "good_value": [
+            "3:1"
+        ],
+        "poor_value": [
+            "5:1"
+        ],
+        "very_poor_value": [
+            "10:1"
+        ]
+    },
+    "metadata": {
+        "last_updated": "2024-01-15",
+        "notes": "Transfer ratios and minimums may change. Always verify current terms before transferring.",
+        "recommendations": {
+            "best_hotel_transfers": [
+                "Marriott to airlines with 60k+ bonus",
+                "Accor to Air France-KLM"
+            ],
+            "best_airline_transfers": [
+                "Singapore/Cathay to Hyatt",
+                "Virgin Atlantic to Hilton"
+            ],
+            "avios_flexibility": "All Avios currencies (BA, Iberia, Aer Lingus, Qatar, Finnair) transfer 1:1 between each other"
+        }
+    }
+}

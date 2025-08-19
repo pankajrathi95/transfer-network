@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <script src="https://cdn.tailwindcss.com"></script>
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+     <style>
+        /* Custom styles for elements not easily handled by Tailwind */
+        .container {
+            max-width: 1200px;
+        }
+        
+        /* Search container and search box styles are handled by Tailwind CSS classes */
+        
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #d1d5db;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dropdown-item {
+            padding: 12px;
+            cursor: pointer;
+            border-bottom: 1px solid #f3f4f6;
+            transition: background-color 0.15s ease;
+        }
+        
+        .dropdown-item:hover {
+            background-color: #f3f4f6;
+        }
+        
+        .dropdown-item.selected {
+            background-color: #3b82f6;
+            color: white;
+        }
+        
+        /* Button styles handled by Tailwind */
+        
+        .routes-result {
+            display: none;
+        }
+        
+        .route-steps {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .arrow {
+            color: #3b82f6;
+            font-weight: bold;
+        }
+     </style>
+    </head>
+	 
+<body class="bg-gray-50 font-sans">
+<div class="container mx-auto bg-white my-5 p-6 rounded-xl shadow-lg">
+ <div class="flex justify-between items-start mb-6">
+    <div>
+        <h1 class="text-3xl font-bold text-gray-800 mb-4">🌍 Airline & Hotel Loyalty Program Transfer Network</h1>
+        <p class="text-gray-600">This interactive tool shows transfer relationships between airline and hotel loyalty programs. Find the best routes and ratios for transferring points between programs.</p>
+    </div>
+    <a href="https://github.com/pankajrathi95/transfer-network" target="_blank" 
+       class="flex items-center gap-2 px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clip-rule="evenodd"></path>
+        </svg>
+        GitHub
+    </a>
+ </div>
+
+ <div class="flex flex-col lg:flex-row gap-6 mb-8 p-6 bg-gray-50 rounded-lg border-2 border-gray-200">
+    <div class="flex-1 relative">
+        <label for="source" class="block mb-2 font-semibold text-gray-700">Source Partner:</label>
+        <input type="text" id="source" placeholder="Select source partner..." autocomplete="off" 
+               class="w-full p-3 border-2 border-gray-300 rounded-lg text-base focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
+        <div class="dropdown" id="sourceDropdown"></div>
+    </div>
+    
+    <div class="flex-1 relative">
+        <label for="destination" class="block mb-2 font-semibold text-gray-700">Destination Partner:</label>
+        <input type="text" id="destination" placeholder="Select destination partner..." autocomplete="off"
+               class="w-full p-3 border-2 border-gray-300 rounded-lg text-base focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
+        <div class="dropdown" id="destinationDropdown"></div>
+    </div>
+    
+    <button onclick="findRoutes()" id="findRoutesBtn" disabled
+            class="self-end px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors">
+        Find Routes
+    </button>
+ </div>
+ 
+ <!-- Transfer Calculator Widget -->
+ <div class="mt-6 p-6 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg border-2 border-green-200" id="calculatorWidget" style="display: none;">
+    <h3 class="text-xl font-bold text-gray-800 mb-4">💰 Transfer Value Calculator</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Points to Transfer:</label>
+            <input type="number" id="pointsInput" placeholder="e.g., 60000" 
+                   class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all"
+                   oninput="calculateTransferValue()">
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Selected Route:</label>
+            <input type="text" id="selectedRoute" readonly 
+                   class="w-full p-3 bg-gray-100 border-2 border-gray-300 rounded-lg text-gray-600"
+                   placeholder="Find a route first">
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">You'll Receive:</label>
+            <div id="calculationResult" class="w-full p-3 bg-white border-2 border-green-300 rounded-lg font-bold text-green-800 min-h-[48px] flex items-center">
+                Enter points to calculate
+            </div>
+        </div>
+    </div>
+    <div id="calculatorDetails" class="mt-4"></div>
+ </div>
+
+ <div class="routes-result mt-6 p-6 bg-blue-50 rounded-lg border-l-4 border-blue-500" id="routesResult">
+    <h3 class="text-xl font-bold text-gray-800 mb-4">Transfer Routes:</h3>
+    <div id="routesList"></div>
+ </div>
+
+ <div class="bg-gray-50 p-6 rounded-lg mb-6">
+    <div class="mb-6">
+        <button onclick="toggleOverview()" class="flex items-center justify-between w-full text-left focus:outline-none">
+            <div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">🏨 ✈️ Transfer Network Overview</h3>
+                <p class="text-gray-600 text-sm">Major loyalty programs organized by transfer value and strategic importance</p>
+            </div>
+            <svg id="overviewChevron" class="w-6 h-6 text-gray-500 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </button>
+    </div>
+    
+    <div id="overviewContent" class="hidden">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div>
+            <h4 class="text-lg font-semibold text-blue-600 mb-4">🏨 Hotel Programs (by Transfer Value)</h4>
+            <ul class="space-y-3">
+                <li class="p-3 bg-green-100 rounded-lg border-l-4 border-green-500">
+                    <strong>Marriott Bonvoy</strong> - Best for airline transfers (3:1 + 5k bonus)
+                    <div class="text-xs text-gray-600 mt-1">17 airline partners • 60k minimum</div>
+                </li>
+                <li class="p-3 bg-green-100 rounded-lg border-l-4 border-green-500">
+                    <strong>World of Hyatt</strong> - Excellent redemption value
+                    <div class="text-xs text-gray-600 mt-1">Premium hotel stays • Transfer target from airlines</div>
+                </li>
+                <li class="p-3 bg-blue-100 rounded-lg border-l-4 border-blue-500">
+                    <strong>Accor Live Limitless</strong> - Good for European travel (2:1)
+                    <div class="text-xs text-gray-600 mt-1">5 airline partners • European focus</div>
+                </li>
+                <li class="p-3 bg-orange-100 rounded-lg border-l-4 border-orange-500">
+                    <strong>ITC Hotels</strong> - Indian luxury chain (3:1-4:1)
+                    <div class="text-xs text-gray-600 mt-1">Indian market • Partners with Taj</div>
+                </li>
+                <li class="p-3 bg-purple-100 rounded-lg border-l-4 border-purple-500">
+                    <strong>Taj Hotels</strong> - Premium Indian hospitality (4:1-5:1)
+                    <div class="text-xs text-gray-600 mt-1">Luxury Indian hotels • Avios access</div>
+                </li>
+                <li class="p-3 bg-yellow-100 rounded-lg border-l-4 border-yellow-500">
+                    <strong>IHG Rewards</strong> - Poor value (5:1)
+                    <div class="text-xs text-gray-600 mt-1">10 airline partners • Not recommended</div>
+                </li>
+                <li class="p-3 bg-red-100 rounded-lg border-l-4 border-red-500">
+                    <strong>Hilton Honors</strong> - Very poor value (10:1)
+                    <div class="text-xs text-gray-600 mt-1">10 airline partners • Avoid unless desperate</div>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="text-lg font-semibold text-blue-600 mb-4">✈️ Airline Programs (by Network Value)</h4>
+            <ul class="space-y-3">
+                <li class="p-3 bg-yellow-100 rounded-lg border-l-4 border-yellow-500">
+                    <strong>Avios Network</strong> - BA, Iberia, Aer Lingus, Qatar, Finnair
+                    <div class="text-xs text-gray-600 mt-1">1:1 instant transfers • Excellent flexibility</div>
+                </li>
+                <li class="p-3 bg-green-100 rounded-lg border-l-4 border-green-500">
+                    <strong>Singapore KrisFlyer</strong> - Transfers to premium hotels
+                    <div class="text-xs text-gray-600 mt-1">1:1 to Marriott & Hyatt • Great value</div>
+                </li>
+                <li class="p-3 bg-green-100 rounded-lg border-l-4 border-green-500">
+                    <strong>Cathay Pacific Asia Miles</strong> - Hotel transfer partner
+                    <div class="text-xs text-gray-600 mt-1">1:1 to Marriott & Hyatt • Asian focus</div>
+                </li>
+                <li class="p-3 bg-blue-100 rounded-lg border-l-4 border-blue-500">
+                    <strong>Virgin Atlantic</strong> - Flexible transfer options
+                    <div class="text-xs text-gray-600 mt-1">Up to 1:1.5 ratios • Multiple hotel partners</div>
+                </li>
+                <li class="p-3 bg-orange-100 rounded-lg border-l-4 border-orange-500">
+                    <strong>Air India Flying Returns</strong> - Indian national carrier
+                    <div class="text-xs text-gray-600 mt-1">1:1 to Indian hotels • Domestic focus</div>
+                </li>
+                <li class="p-3 bg-indigo-100 rounded-lg border-l-4 border-indigo-500">
+                    <strong>Vistara Club Vistara</strong> - Indian premium airline
+                    <div class="text-xs text-gray-600 mt-1">Up to 1:1.5 to hotels • Enhanced ratios</div>
+                </li>
+                <li class="p-3 bg-purple-100 rounded-lg border-l-4 border-purple-500">
+                    <strong>US Airlines</strong> - American, Delta, United, Southwest
+                    <div class="text-xs text-gray-600 mt-1">Marriott partners only • 3:1 + bonus</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="p-4 bg-green-100 rounded-lg border-l-4 border-green-500">
+            <strong class="text-green-800">💡 Pro Tips:</strong> 
+            <div class="text-green-700 mt-2 text-sm">
+                • Marriott 60k+ transfers always get 5k bonus miles<br>
+                • Avios currencies transfer instantly between partners<br>
+                • Hotel points generally worth less than airline miles<br>
+                • Direct transfers are usually better than multi-step routes
+            </div>
+        </div>
+        <div class="p-4 bg-blue-100 rounded-lg border-l-4 border-blue-500">
+            <strong class="text-blue-800">🎯 Search Strategy:</strong> 
+            <div class="text-blue-700 mt-2 text-sm">
+                • Use the search tool above to find optimal routes<br>
+                • Algorithm prioritizes direct transfers and best value<br>
+                • Circular routes are automatically prevented<br>
+                • Results are ranked by transfer efficiency
+            </div>
+        </div>
+    </div>
+    </div> <!-- End overviewContent -->
+ </div>
+
+ <!-- Footer with GitHub issue reporting -->
+ <div class="bg-gray-100 p-6 rounded-lg mb-6 border-2 border-dashed border-gray-300">
+    <div class="text-center">
+        <h4 class="text-lg font-semibold text-gray-800 mb-3">📝 Help Improve This Tool</h4>
+        <p class="text-gray-600 mb-4">Found outdated transfer rates? Missing a loyalty program? Have suggestions for improvements?</p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center items-center">
+            <a href="https://github.com/pankajrathi95/transfer-network/issues/new?labels=data-update&template=data_update.md&title=Transfer%20Data%20Update" 
+               target="_blank"
+               class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium">
+                🚨 Report Outdated Data
+            </a>
+            <a href="https://github.com/pankajrathi95/transfer-network/issues/new?labels=enhancement&template=feature_request.md&title=New%20Feature%20Request" 
+               target="_blank"
+               class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                💡 Suggest Improvement
+            </a>
+            <a href="https://github.com/pankajrathi95/transfer-network/issues/new?labels=new-program&template=new_program.md&title=Add%20New%20Program" 
+               target="_blank"
+               class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium">
+                ➕ Add New Program
+            </a>
+        </div>
+        <p class="text-xs text-gray-500 mt-4">
+            This is a community-driven project. Your contributions help keep transfer data accurate and up-to-date for everyone!
+        </p>
+    </div>
+ </div>
+	
+</body>
+<script>
+mermaid.initialize({
+    startOnLoad: true,
+    theme: 'forest',
+    flowchart: {
+        useMaxWidth: true,
+        htmlLabels: true,
+        curve: 'basis'
+    }
+});
+
+// Global variables
+let transferNetwork = null;
+let allPartners = [];
+let transferData = {};
+
+let selectedSource = '';
+let selectedDestination = '';
+let currentFocus = -1;
+
+// Load transfer network data
+async function loadTransferNetwork() {
+    try {
+        const response = await fetch('transfer-network.json');
+        transferNetwork = await response.json();
+        
+        // Create simplified transfer data structure for route finding
+        transferData = {};
+        
+        // Add all airlines and hotels as nodes
+        Object.entries(transferNetwork.nodes.airlines).forEach(([key, airline]) => {
+            transferData[airline.name] = {
+                id: key,
+                type: 'airline',
+                name: airline.name,
+                category: airline.category,
+                partners: {}
+            };
+        });
+        
+        Object.entries(transferNetwork.nodes.hotels).forEach(([key, hotel]) => {
+            transferData[hotel.name] = {
+                id: key,
+                type: 'hotel', 
+                name: hotel.name,
+                category: hotel.category,
+                partners: {}
+            };
+        });
+        
+        // Build transfer relationships
+        // Hotel to Airline transfers
+        Object.entries(transferNetwork.edges.hotel_to_airline).forEach(([hotelId, airlines]) => {
+            const hotelName = transferNetwork.nodes.hotels[hotelId].name;
+            Object.entries(airlines).forEach(([airlineId, transferInfo]) => {
+                const airlineName = transferNetwork.nodes.airlines[airlineId].name;
+                transferData[hotelName].partners[airlineName] = {
+                    ratio: transferInfo.ratio,
+                    notes: transferInfo.notes,
+                    bonus: transferInfo.bonus_miles || 0,
+                    minTransfer: transferInfo.min_transfer || 0
+                };
+            });
+        });
+        
+        // Airline to Hotel transfers
+        Object.entries(transferNetwork.edges.airline_to_hotel).forEach(([airlineId, hotels]) => {
+            const airlineName = transferNetwork.nodes.airlines[airlineId].name;
+            Object.entries(hotels).forEach(([hotelId, transferInfo]) => {
+                const hotelName = transferNetwork.nodes.hotels[hotelId].name;
+                transferData[airlineName].partners[hotelName] = {
+                    ratio: transferInfo.ratio,
+                    notes: transferInfo.notes,
+                    minTransfer: transferInfo.min_transfer || 0
+                };
+            });
+        });
+        
+        // Airline to Airline transfers (Avios partners)
+        Object.entries(transferNetwork.edges.airline_to_airline).forEach(([airlineId, partners]) => {
+            const airlineName = transferNetwork.nodes.airlines[airlineId].name;
+            Object.entries(partners).forEach(([partnerId, transferInfo]) => {
+                const partnerName = transferNetwork.nodes.airlines[partnerId].name;
+                transferData[airlineName].partners[partnerName] = {
+                    ratio: transferInfo.ratio,
+                    notes: transferInfo.notes,
+                    minTransfer: transferInfo.min_transfer || 0
+                };
+            });
+        });
+        
+        // Hotel to Hotel transfers
+        Object.entries(transferNetwork.edges.hotel_to_hotel).forEach(([hotelId, partners]) => {
+            const hotelName = transferNetwork.nodes.hotels[hotelId].name;
+            Object.entries(partners).forEach(([partnerId, transferInfo]) => {
+                const partnerName = transferNetwork.nodes.hotels[partnerId].name;
+                transferData[hotelName].partners[partnerName] = {
+                    ratio: transferInfo.ratio,
+                    notes: transferInfo.notes,
+                    minTransfer: transferInfo.min_transfer || 0
+                };
+            });
+        });
+        
+        // Create sorted list of all partners
+        allPartners = Object.keys(transferData).sort();
+        
+        console.log('Transfer network loaded successfully:', transferData);
+        
+    } catch (error) {
+        console.error('Error loading transfer network:', error);
+        // Fallback to basic data if JSON fails to load
+        allPartners = [];
+    }
+}
+
+// Initialize autocomplete
+function initAutocomplete() {
+    const sourceInput = document.getElementById('source');
+    const destinationInput = document.getElementById('destination');
+    
+    sourceInput.addEventListener('input', function() {
+        showDropdown(this, 'sourceDropdown', 'source');
+    });
+    
+    destinationInput.addEventListener('input', function() {
+        showDropdown(this, 'destinationDropdown', 'destination');
+    });
+    
+    // Handle keyboard navigation
+    sourceInput.addEventListener('keydown', function(e) {
+        handleKeydown(e, 'sourceDropdown', 'source');
+    });
+    
+    destinationInput.addEventListener('keydown', function(e) {
+        handleKeydown(e, 'destinationDropdown', 'destination');
+    });
+    
+    // Hide dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.search-box')) {
+            hideAllDropdowns();
+        }
+    });
+}
+
+function showDropdown(input, dropdownId, type) {
+    const dropdown = document.getElementById(dropdownId);
+    const query = input.value.toLowerCase();
+    
+    if (query.length === 0) {
+        dropdown.style.display = 'none';
+        return;
+    }
+    
+    const filtered = allPartners.filter(partner => 
+        partner.toLowerCase().includes(query) &&
+        partner !== (type === 'source' ? selectedDestination : selectedSource)
+    );
+    
+    if (filtered.length === 0) {
+        dropdown.style.display = 'none';
+        return;
+    }
+    
+    dropdown.innerHTML = '';
+    filtered.forEach((partner, index) => {
+        const item = document.createElement('div');
+        item.className = 'dropdown-item';
+        item.textContent = partner;
+        item.addEventListener('click', function() {
+            selectPartner(partner, type, input, dropdown);
+        });
+        dropdown.appendChild(item);
+    });
+    
+    dropdown.style.display = 'block';
+    currentFocus = -1;
+}
+
+function selectPartner(partner, type, input, dropdown) {
+    input.value = partner;
+    if (type === 'source') {
+        selectedSource = partner;
+    } else {
+        selectedDestination = partner;
+    }
+    dropdown.style.display = 'none';
+    updateFindButton();
+}
+
+function handleKeydown(e, dropdownId, type) {
+    const dropdown = document.getElementById(dropdownId);
+    const items = dropdown.querySelectorAll('.dropdown-item');
+    
+    if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        currentFocus++;
+        if (currentFocus >= items.length) currentFocus = 0;
+        setActive(items);
+    } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        currentFocus--;
+        if (currentFocus < 0) currentFocus = items.length - 1;
+        setActive(items);
+    } else if (e.key === 'Enter') {
+        e.preventDefault();
+        if (currentFocus > -1 && items[currentFocus]) {
+            const partner = items[currentFocus].textContent;
+            const input = type === 'source' ? document.getElementById('source') : document.getElementById('destination');
+            selectPartner(partner, type, input, dropdown);
+        }
+    }
+}
+
+function setActive(items) {
+    items.forEach((item, index) => {
+        item.classList.toggle('selected', index === currentFocus);
+    });
+}
+
+function hideAllDropdowns() {
+    document.getElementById('sourceDropdown').style.display = 'none';
+    document.getElementById('destinationDropdown').style.display = 'none';
+}
+
+function updateFindButton() {
+    const button = document.getElementById('findRoutesBtn');
+    button.disabled = !selectedSource || !selectedDestination || selectedSource === selectedDestination;
+}
+
+// Improved route finding algorithm with circular route prevention
+function findRoutes() {
+    if (!selectedSource || !selectedDestination) return;
+    
+    const routes = [];
+    let hasDirectRoute = false;
+    
+    // Direct transfer - highest priority
+    if (transferData[selectedSource] && transferData[selectedSource].partners[selectedDestination]) {
+        const transferInfo = transferData[selectedSource].partners[selectedDestination];
+        routes.push({
+            path: [selectedSource, selectedDestination],
+            ratios: [transferInfo.ratio],
+            totalRatio: transferInfo.ratio,
+            transferDetails: [transferInfo],
+            valueScore: calculateValueScore(transferInfo.ratio),
+            notes: [transferInfo.notes || '']
+        });
+        hasDirectRoute = true;
+    }
+    
+    // Only search for indirect routes if no direct route exists OR if direct route is poor value
+    const shouldSearchIndirect = !hasDirectRoute || (hasDirectRoute && routes[0].valueScore <= 2);
+    
+    if (shouldSearchIndirect && transferData[selectedSource]) {
+        // One-step indirect transfers
+        Object.keys(transferData[selectedSource].partners).forEach(intermediate => {
+            // Avoid circular routes
+            if (intermediate === selectedDestination || intermediate === selectedSource) return;
+            
+            if (transferData[intermediate] && transferData[intermediate].partners[selectedDestination]) {
+                const transfer1 = transferData[selectedSource].partners[intermediate];
+                const transfer2 = transferData[intermediate].partners[selectedDestination];
+                const totalRatio = calculateTotalRatio(transfer1.ratio, transfer2.ratio);
+                const avgValueScore = Math.round((calculateValueScore(transfer1.ratio) + calculateValueScore(transfer2.ratio)) / 2);
+                
+                routes.push({
+                    path: [selectedSource, intermediate, selectedDestination],
+                    ratios: [transfer1.ratio, transfer2.ratio],
+                    totalRatio: totalRatio,
+                    transferDetails: [transfer1, transfer2],
+                    valueScore: avgValueScore,
+                    notes: [transfer1.notes || '', transfer2.notes || '']
+                });
+            }
+        });
+        
+        // Two-step indirect transfers (only if no good 1-step routes found)
+        const hasGoodRoute = routes.some(route => route.valueScore >= 4);
+        if (!hasGoodRoute) {
+            Object.keys(transferData[selectedSource].partners).forEach(intermediate1 => {
+                if (intermediate1 === selectedDestination || intermediate1 === selectedSource) return;
+                
+                if (transferData[intermediate1]) {
+                    Object.keys(transferData[intermediate1].partners).forEach(intermediate2 => {
+                        // Prevent circular routes and ensure unique path
+                        if (intermediate2 === selectedSource || 
+                            intermediate2 === selectedDestination || 
+                            intermediate2 === intermediate1 ||
+                            !transferData[intermediate2] ||
+                            !transferData[intermediate2].partners[selectedDestination]) return;
+                        
+                        const transfer1 = transferData[selectedSource].partners[intermediate1];
+                        const transfer2 = transferData[intermediate1].partners[intermediate2];
+                        const transfer3 = transferData[intermediate2].partners[selectedDestination];
+                        
+                        const totalRatio = calculateMultiStepRatio([transfer1.ratio, transfer2.ratio, transfer3.ratio]);
+                        const avgValueScore = Math.round((calculateValueScore(transfer1.ratio) + 
+                                                     calculateValueScore(transfer2.ratio) + 
+                                                     calculateValueScore(transfer3.ratio)) / 3);
+                        
+                        routes.push({
+                            path: [selectedSource, intermediate1, intermediate2, selectedDestination],
+                            ratios: [transfer1.ratio, transfer2.ratio, transfer3.ratio],
+                            totalRatio: totalRatio,
+                            transferDetails: [transfer1, transfer2, transfer3],
+                            valueScore: avgValueScore,
+                            notes: [transfer1.notes || '', transfer2.notes || '', transfer3.notes || '']
+                        });
+                    });
+                }
+            });
+        }
+    }
+    
+    displayRoutes(routes);
+}
+
+function calculateTotalRatio(ratio1, ratio2) {
+    const [r1From, r1To] = ratio1.split(':').map(Number);
+    const [r2From, r2To] = ratio2.split(':').map(Number);
+    
+    // Calculate the effective ratio
+    const totalFrom = r1From * r2From;
+    const totalTo = r1To * r2To;
+    
+    return `${totalFrom}:${totalTo}`;
+}
+
+function calculateMultiStepRatio(ratios) {
+    let totalFrom = 1;
+    let totalTo = 1;
+    
+    ratios.forEach(ratio => {
+        const [from, to] = ratio.split(':').map(Number);
+        totalFrom *= from;
+        totalTo *= to;
+    });
+    
+    return `${totalFrom}:${totalTo}`;
+}
+
+function calculateValueScore(ratio) {
+    const [from, to] = ratio.split(':').map(Number);
+    const value = to / from;
+    
+    // Score based on transfer efficiency
+    if (value >= 1.0) return 5; // Excellent (1:1 or better)
+    if (value >= 0.5) return 4; // Good (2:1)
+    if (value >= 0.33) return 3; // Fair (3:1)
+    if (value >= 0.2) return 2;  // Poor (5:1)
+    return 1; // Very poor (10:1 or worse)
+}
+
+function getValueLabel(score) {
+    switch(score) {
+        case 5: return 'Excellent';
+        case 4: return 'Good';
+        case 3: return 'Fair';
+        case 2: return 'Poor';
+        case 1: return 'Very Poor';
+        default: return 'Unknown';
+    }
+}
+
+function getValueColor(score) {
+    switch(score) {
+        case 5: return '#28a745'; // Green
+        case 4: return '#17a2b8'; // Teal  
+        case 3: return '#ffc107'; // Yellow
+        case 2: return '#fd7e14'; // Orange
+        case 1: return '#dc3545'; // Red
+        default: return '#6c757d'; // Gray
+    }
+}
+
+function displayRoutes(routes) {
+    const routesResult = document.getElementById('routesResult');
+    const routesList = document.getElementById('routesList');
+    
+    // Store routes globally for calculator access
+    currentRoutes = routes;
+    
+    if (routes.length === 0) {
+        routesList.innerHTML = '<p>No transfer routes found between these partners.</p>';
+    } else {
+        // Sort by value score first, then by path length
+        routes.sort((a, b) => {
+            // Primary sort: value score (higher is better)
+            if (a.valueScore !== b.valueScore) {
+                return b.valueScore - a.valueScore;
+            }
+            // Secondary sort: path length (shorter is better)
+            return a.path.length - b.path.length;
+        });
+        
+        routesList.innerHTML = routes.map((route, index) => {
+            const isRecommended = index === 0; // Best route
+            const valueLabel = getValueLabel(route.valueScore);
+            const valueColor = getValueColor(route.valueScore);
+            const routeId = `route-${index}`;
+            
+            return `
+            <div class="my-4 p-4 bg-white rounded-lg border-l-4 shadow-sm ${isRecommended ? 'border-2 ring-2 ring-opacity-50' : 'border'}" style="border-left-color: ${valueColor}; ${isRecommended ? `border-color: ${valueColor}; ring-color: ${valueColor};` : ''}">
+                ${isRecommended ? `<div class="mb-3 -mx-4 -mt-4 px-4 py-2 text-white font-bold rounded-t-lg" style="background-color: ${valueColor};">🏆 BEST ROUTE</div>` : ''}
+                
+                <div class="route-steps">
+                    ${route.path.map((step, stepIndex) => {
+                        if (stepIndex === route.path.length - 1) {
+                            return `<span class="inline-block px-3 py-2 bg-gray-100 rounded-full text-sm font-medium border">${step}</span>`;
+                        } else {
+                            return `
+                                <span class="inline-block px-3 py-2 bg-gray-100 rounded-full text-sm font-medium border">${step}</span>
+                                <span class="arrow mx-2">→</span>
+                                <span class="inline-block px-2 py-1 text-white text-xs font-bold rounded-full" style="background-color: ${valueColor};">${route.ratios[stepIndex]}</span>
+                                <span class="arrow mx-2">→</span>
+                            `;
+                        }
+                    }).join('')}
+                </div>
+                
+                <div class="mt-4 flex justify-between items-start">
+                    <div class="flex-1">
+                        <div class="font-bold text-lg" style="color: ${valueColor};">
+                            Total Ratio: ${route.totalRatio}
+                            <span class="ml-2 px-2 py-1 text-white text-xs rounded-full" style="background-color: ${valueColor};">
+                                ${valueLabel} Value
+                            </span>
+                            <span class="ml-2 text-gray-600 text-sm font-normal">
+                                ${route.path.length === 2 ? '(Direct Transfer)' : `(${route.path.length - 1}-Step Transfer)`}
+                            </span>
+                        </div>
+                        
+                        ${route.transferDetails.some(detail => detail.bonus > 0) ? 
+                            `<div class="mt-2 text-green-600 font-bold">
+                                ✨ Bonus: +${route.transferDetails.find(d => d.bonus > 0).bonus} miles for 60k+ transfers
+                            </div>` : ''
+                        }
+                        
+                        ${route.notes.filter(note => note.length > 0).length > 0 ? 
+                            `<div class="mt-3 p-3 bg-gray-50 rounded-lg text-sm text-gray-600">
+                                <strong class="text-gray-800">Notes:</strong><br>
+                                ${route.notes.filter(note => note.length > 0).map(note => `• ${note}`).join('<br>')}
+                            </div>` : ''
+                        }
+                    </div>
+                    
+                    <button onclick="selectRouteForCalculator(${index})" 
+                            class="ml-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium">
+                        📊 Calculate
+                    </button>
+                </div>
+            </div>
+        `;
+        }).join('');
+    }
+    
+    routesResult.style.display = 'block';
+}
+
+function calculateRatioValue(ratio) {
+    const [from, to] = ratio.split(':').map(Number);
+    return to / from;
+}
+
+// Global variable to store current routes for calculator
+let currentRoutes = [];
+
+// Toggle overview section
+function toggleOverview() {
+    const content = document.getElementById('overviewContent');
+    const chevron = document.getElementById('overviewChevron');
+    
+    if (content.classList.contains('hidden')) {
+        content.classList.remove('hidden');
+        chevron.style.transform = 'rotate(180deg)';
+    } else {
+        content.classList.add('hidden');
+        chevron.style.transform = 'rotate(0deg)';
+    }
+}
+
+// Calculator functions
+function selectRouteForCalculator(routeIndex) {
+    if (routeIndex >= currentRoutes.length) return;
+    
+    const route = currentRoutes[routeIndex];
+    const calculatorWidget = document.getElementById('calculatorWidget');
+    const selectedRouteInput = document.getElementById('selectedRoute');
+    
+    // Show calculator widget
+    calculatorWidget.style.display = 'block';
+    
+    // Set selected route
+    const routeText = route.path.join(' → ');
+    selectedRouteInput.value = `${routeText} (${route.totalRatio})`;
+    
+    // Store route data for calculation
+    calculatorWidget.dataset.selectedRoute = JSON.stringify(route);
+    
+    // Trigger calculation if points are already entered
+    calculateTransferValue();
+    
+    // Scroll to calculator
+    calculatorWidget.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function calculateTransferValue() {
+    const pointsInput = document.getElementById('pointsInput');
+    const calculationResult = document.getElementById('calculationResult');
+    const calculatorDetails = document.getElementById('calculatorDetails');
+    const calculatorWidget = document.getElementById('calculatorWidget');
+    
+    const points = parseInt(pointsInput.value);
+    const routeData = calculatorWidget.dataset.selectedRoute;
+    
+    if (!points || !routeData) {
+        calculationResult.textContent = points ? 'Select a route first' : 'Enter points to calculate';
+        calculatorDetails.innerHTML = '';
+        return;
+    }
+    
+    const route = JSON.parse(routeData);
+    
+    // Calculate transfer result
+    let result = calculateTransferResult(points, route);
+    
+    // Display main result
+    calculationResult.innerHTML = `
+        <div class="text-lg font-bold text-green-800">
+            ${result.finalAmount.toLocaleString()} ${result.finalCurrency}
+            ${result.bonus > 0 ? `<span class="text-sm text-green-600 block">+ ${result.bonus.toLocaleString()} bonus</span>` : ''}
+        </div>
+    `;
+    
+    // Display detailed breakdown
+    calculatorDetails.innerHTML = `
+        <div class="bg-white p-4 rounded-lg border border-gray-200">
+            <h4 class="font-semibold text-gray-800 mb-3">📊 Transfer Breakdown:</h4>
+            <div class="space-y-2 text-sm">
+                ${result.steps.map((step, index) => `
+                    <div class="flex justify-between items-center py-1 ${index < result.steps.length - 1 ? 'border-b border-gray-100' : ''}">
+                        <span class="text-gray-600">${step.description}</span>
+                        <span class="font-medium">${step.amount.toLocaleString()} ${step.currency}</span>
+                    </div>
+                `).join('')}
+                ${result.bonus > 0 ? `
+                    <div class="flex justify-between items-center py-1 text-green-600 font-medium">
+                        <span>✨ Bonus (60k+ transfer)</span>
+                        <span>+${result.bonus.toLocaleString()}</span>
+                    </div>
+                ` : ''}
+                <div class="flex justify-between items-center py-2 border-t-2 border-gray-300 font-bold text-green-800">
+                    <span>Total You'll Receive:</span>
+                    <span>${result.finalAmount.toLocaleString()} ${result.finalCurrency}</span>
+                </div>
+            </div>
+            
+            ${result.minimumWarning ? `
+                <div class="mt-3 p-2 bg-yellow-100 border border-yellow-300 rounded text-yellow-800 text-sm">
+                    ⚠️ ${result.minimumWarning}
+                </div>
+            ` : ''}
+            
+            ${result.valueAssessment ? `
+                <div class="mt-3 p-2 bg-blue-100 border border-blue-300 rounded text-blue-800 text-sm">
+                    💡 ${result.valueAssessment}
+                </div>
+            ` : ''}
+        </div>
+    `;
+}
+
+function calculateTransferResult(points, route) {
+    let currentAmount = points;
+    let steps = [];
+    let bonus = 0;
+    let minimumWarning = '';
+    
+    // Process each transfer step
+    route.ratios.forEach((ratio, index) => {
+        const [from, to] = ratio.split(':').map(Number);
+        const fromCurrency = index === 0 ? 'points' : steps[index - 1].currency;
+        const toCurrency = index === route.ratios.length - 1 ? 
+            route.transferDetails[route.transferDetails.length - 1].notes?.includes('miles') ? 'miles' : 'points' : 'points';
+        
+        const transferAmount = Math.floor(currentAmount * (to / from));
+        
+        steps.push({
+            description: `${route.path[index]} → ${route.path[index + 1]} (${ratio})`,
+            amount: transferAmount,
+            currency: toCurrency
+        });
+        
+        currentAmount = transferAmount;
+        
+        // Check for bonus on first transfer (usually hotel to airline)
+        if (index === 0 && route.transferDetails[0].bonus > 0 && points >= 60000) {
+            bonus = route.transferDetails[0].bonus;
+        }
+        
+        // Check minimum transfer requirements
+        const minTransfer = route.transferDetails[index].minTransfer || 0;
+        if (points < minTransfer && !minimumWarning) {
+            minimumWarning = `Minimum transfer required: ${minTransfer.toLocaleString()} points`;
+        }
+    });
+    
+    const finalAmount = currentAmount + bonus;
+    const finalCurrency = steps[steps.length - 1].currency;
+    
+    // Value assessment
+    let valueAssessment = '';
+    const efficiency = finalAmount / points;
+    if (efficiency >= 0.5) {
+        valueAssessment = 'Excellent value! This is a highly efficient transfer.';
+    } else if (efficiency >= 0.3) {
+        valueAssessment = 'Good value transfer, worth considering.';
+    } else if (efficiency >= 0.2) {
+        valueAssessment = 'Fair value. Consider if you need the flexibility.';
+    } else {
+        valueAssessment = 'Poor value transfer. Look for better alternatives.';
+    }
+    
+    return {
+        finalAmount,
+        finalCurrency,
+        bonus,
+        steps,
+        minimumWarning,
+        valueAssessment
+    };
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', async function() {
+    await loadTransferNetwork();
+    initAutocomplete();
+});
+</script>
+
+</html>
