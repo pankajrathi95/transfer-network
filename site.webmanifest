@@ -1,0 +1,22 @@
+{
+    "name": "Transfer Network - Loyalty Program Transfer Tool",
+    "short_name": "Transfer Network",
+    "description": "Find optimal airline and hotel loyalty program transfer routes",
+    "icons": [
+        {
+            "src": "favicon-32x32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+        {
+            "src": "favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml"
+        }
+    ],
+    "theme_color": "#3b82f6",
+    "background_color": "#f8fafc",
+    "display": "standalone",
+    "start_url": "/",
+    "scope": "/"
+}

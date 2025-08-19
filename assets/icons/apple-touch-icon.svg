@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="180" height="180">
+  <!-- Background with rounded corners for iOS style -->
+  <rect width="180" height="180" rx="40" ry="40" fill="#3b82f6"/>
+  
+  <!-- Airplane icon (larger, centered) -->
+  <g transform="translate(40, 60)">
+    <path d="M20 30l15-8 20-20 8 8-12 12 12 4 8-8 4 4-10 10-4-4 8-8-12-4 12-12-8-8-20 20-15 8z" fill="white" stroke="white" stroke-width="1"/>
+  </g>
+  
+  <!-- Hotel building icon -->
+  <g transform="translate(90, 40)">
+    <rect x="0" y="0" width="60" height="80" fill="white" opacity="0.95"/>
+    <!-- Windows -->
+    <rect x="8" y="10" width="8" height="8" fill="#3b82f6"/>
+    <rect x="20" y="10" width="8" height="8" fill="#3b82f6"/>
+    <rect x="32" y="10" width="8" height="8" fill="#3b82f6"/>
+    <rect x="44" y="10" width="8" height="8" fill="#3b82f6"/>
+    
+    <rect x="8" y="25" width="8" height="8" fill="#3b82f6"/>
+    <rect x="20" y="25" width="8" height="8" fill="#3b82f6"/>
+    <rect x="32" y="25" width="8" height="8" fill="#3b82f6"/>
+    <rect x="44" y="25" width="8" height="8" fill="#3b82f6"/>
+    
+    <rect x="8" y="40" width="8" height="8" fill="#3b82f6"/>
+    <rect x="20" y="40" width="8" height="8" fill="#3b82f6"/>
+    <rect x="32" y="40" width="8" height="8" fill="#3b82f6"/>
+    <rect x="44" y="40" width="8" height="8" fill="#3b82f6"/>
+    
+    <rect x="8" y="55" width="8" height="8" fill="#3b82f6"/>
+    <rect x="20" y="55" width="8" height="8" fill="#3b82f6"/>
+    <rect x="32" y="55" width="8" height="8" fill="#3b82f6"/>
+    <rect x="44" y="55" width="8" height="8" fill="#3b82f6"/>
+  </g>
+  
+  <!-- Transfer arrow connecting them -->
+  <g transform="translate(75, 85)">
+    <line x1="0" y1="0" x2="20" y2="0" stroke="white" stroke-width="4" stroke-linecap="round"/>
+    <polygon points="20,-6 30,0 20,6" fill="white"/>
+  </g>
+  
+  <!-- App title at bottom -->
+  <text x="90" y="160" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">Transfer Network</text>
+</svg>
